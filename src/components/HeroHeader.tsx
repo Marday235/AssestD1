@@ -43,10 +43,10 @@ export const HeroHeader = () => {
                             </a>
                             <div className="flex w-full flex-col space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 md:w-fit">
                                 <img
-                                    className="mx-auto h-10 w-fit rounded-full dark:invert"
+                                    className="mx-auto h-10 w-10 rounded-full dark:invert"
                                     src="/Assestd.JPG"
                                     alt="Nvidia Logo"
-                                    height="20"
+                                    height="10"
                                     width="auto"
                                 />
                             </div>
