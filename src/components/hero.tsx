@@ -1,6 +1,6 @@
-import { ArrowUpRight, CirclePlay, Link } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+// import { ArrowUpRight, CirclePlay, Link } from "lucide-react";
+// import { Badge } from "@/components/ui/badge";
+// import { Button } from "@/components/ui/button";
 import { BackgroundPattern } from "@/components/background-pattern";
 
 export default function HeroColor() {

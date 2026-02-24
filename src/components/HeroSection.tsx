@@ -1,27 +1,27 @@
-import React from 'react';
-import { ArrowRight, ChevronRight } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { HeroHeader } from '@/components/HeroHeader.jsx';
 
-const transitionVariants = {
-    item: {
-        hidden: {
-            opacity: 0,
-            filter: 'blur(12px)',
-            y: 12,
-        },
-        visible: {
-            opacity: 1,
-            filter: 'blur(0px)',
-            y: 0,
-            transition: {
-                type: 'spring',
-                bounce: 0.3,
-                duration: 1.5,
-            },
-        },
-    },
-};
+import { ArrowRight, ChevronRight } from 'lucide-react';
+// import { Button } from '@/components/ui/button';
+import { HeroHeader } from '../components/HeroHeader';
+
+// const transitionVariants = {
+//     item: {
+//         hidden: {
+//             opacity: 0,
+//             filter: 'blur(12px)',
+//             y: 12,
+//         },
+//         visible: {
+//             opacity: 1,
+//             filter: 'blur(0px)',
+//             y: 0,
+//             transition: {
+//                 type: 'spring',
+//                 bounce: 0.3,
+//                 duration: 1.5,
+//             },
+//         },
+//     },
+// };
 
 export default function HeroSection() {
     return (

@@ -1,11 +1,9 @@
 import "./App.css";
-import Navbar from "./Navbar.jsx";
-import Hero from "./Hero";
-import Team from "@/components/Team.jsx";
-import AboutUs from "@/components/BlockAbout.jsx";
-import Gallery from "@/components/Gallery.jsx";
-import FAQs from "@/components/FAQs.jsx";
-import HeroSection from "@/components/HeroSection.jsx";
+import Team from "@/components/team";
+import AboutUs from "@/components/BlockAbout";
+import Gallery from "@/components/Gallery";
+import FAQs from "@/components/FAQs";
+import HeroSection from "@/components/HeroSection";
 function App() {
   return (
     <div>

@@ -2,17 +2,17 @@
 
 import { ArrowRightIcon } from 'lucide-react'
 
-import { Button } from '@/components/ui/button'
+import { Button } from "@/components/ui/button";
 
-const StatItem = [
-  {
-    value: '',
-    description: '',
-    icon: () => null, // Placeholder for the icon function
-  },
-];
+// const StatItem = [
+//   {
+//     value: '',
+//     description: '',
+//     icon: () => null, // Placeholder for the icon function
+//   },
+// ];
 
-const AboutUs = ({ stats }) => {
+const AboutUs = () => {
   return (
     <section className='bg-muted py-8 sm:py-6 lg:py-14 ' id='about'>
       <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
