@@ -4,18 +4,24 @@ import AboutUs from "@/components/BlockAbout";
 import Gallery from "@/components/Gallery";
 import FAQs from "@/components/FAQs";
 import HeroSection from "@/components/HeroSection";
+import Footer from "@/components/Footer";
+import { Gallery6 } from "@/components/gallery6";
+import { ThemeProvider } from "next-themes";
 function App() {
   return (
-    <div>
+    <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+      {/* ton application */}
       {/* <HeroColor/> */}
       {/* <Navbar />
       <Hero /> */}
-      <HeroSection /> 
+      <HeroSection />
       <AboutUs />
       <Gallery />
       <Team />
+      {/* <Gallery6 /> */}
       <FAQs />
-    </div>
+      <Footer />
+    </ThemeProvider>
   );
 }
 
