@@ -9,7 +9,7 @@ import { Gallery6 } from "@/components/gallery6";
 import { ThemeProvider } from "next-themes";
 function App() {
   return (
-    <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
       {/* ton application */}
       {/* <HeroColor/> */}
       {/* <Navbar />
