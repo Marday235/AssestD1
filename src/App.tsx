@@ -9,7 +9,7 @@ import Footer from "@/components/Footer";
 import { ThemeProvider } from "next-themes";
 function App() {
   return (
-    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+    <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
       {/* ton application */}
       {/* <HeroColor/> */}
       {/* <Navbar />
