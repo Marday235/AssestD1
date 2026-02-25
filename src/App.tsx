@@ -5,7 +5,7 @@ import Gallery from "@/components/Gallery";
 import FAQs from "@/components/FAQs";
 import HeroSection from "@/components/HeroSection";
 import Footer from "@/components/Footer";
-import { Gallery6 } from "@/components/gallery6";
+
 import { ThemeProvider } from "next-themes";
 function App() {
   return (
