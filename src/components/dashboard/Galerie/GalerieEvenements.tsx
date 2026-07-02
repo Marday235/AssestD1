@@ -291,7 +291,7 @@ export function GalerieEvenements({
                 </div>
               )}
 
-              <Badge variant="accent" className="absolute left-2 top-2">
+              <Badge variant="destructive" className="absolute left-2 top-2">
                 {evt.nombrePhotos} photo{evt.nombrePhotos !== 1 ? "s" : ""}
               </Badge>
             </div>

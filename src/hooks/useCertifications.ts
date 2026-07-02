@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import type { Id } from "../../convex/_generated/dataModel";
-import type { Certification, CertificationFormValues } from "@/components/Certifications/certification.types";
+import type { Certification, CertificationFormValues } from "@/components/dashboard/Certifications/certification.types";
 
 /**
  * Hook centralisant tous les accès Convex pour le module Certifications.

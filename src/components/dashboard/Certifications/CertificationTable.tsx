@@ -130,7 +130,7 @@ export function CertificationTable({
                   <TableCell className="text-sm">{formatDate(cert.dateObtention)}</TableCell>
                   <TableCell>
                     {cert.dateExpiration ? (
-                      <Badge variant={expired ? "destructive" : "success"}>
+                      <Badge variant="destructive" >
                         {expired ? "Expirée" : `Jusqu'au ${formatDate(cert.dateExpiration)}`}
                       </Badge>
                     ) : (

@@ -15,7 +15,7 @@ export const bureauFormSchema = z.object({
   age: z.string(),
   role: z.string().min(2, "Le rôle est requis."),
   niveauEtude: z.string().min(2, "Le niveau d'étude est requis."),
-  statut: z.string("Le statut doit être 'Présent' ou 'Ancien'." ),
+  statut: z.enum(["Présent", "Ancien"]),
   bio: z.string().max(1000, "La bio ne doit pas dépasser 1000 caractères.").optional(),
   photoStorageId: z.string().optional(),
 });

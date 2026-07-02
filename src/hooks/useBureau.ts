@@ -22,7 +22,7 @@ export function useBureau() {
       age: values.age,
       role: values.role,
       niveauEtude: values.niveauEtude,
-      statut: values.statut,
+      statut: "Présent" ,
       bio: values.bio,
       photoStorageId,
     });
@@ -41,7 +41,7 @@ export function useBureau() {
       age: values.age,
       role: values.role,
       niveauEtude: values.niveauEtude,
-      statut: values.statut,
+      statut: values.statut ?? "Présent",
       bio: values.bio,
       photoStorageId,
     });

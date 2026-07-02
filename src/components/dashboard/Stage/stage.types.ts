@@ -18,7 +18,7 @@ export const stageFormSchema = z
       .string()
       .min(20, "La lettre de motivation doit contenir au moins 20 caractères.")
       .max(3000, "La lettre de motivation ne doit pas dépasser 3000 caractères."),
-    statutPaiement: z.string("Le statut doit être 'Payé' ou 'Non payé'." ),
+      statutPaiement: z.enum(["Payé", "Non payé"]),
     datePaiement: z.string().optional().or(z.literal("")),
     dossierStorageId: z.string().optional(),
     dossierNom: z.string().optional(),
@@ -36,7 +36,7 @@ export const stageFormSchema = z
       .string()
       .min(20, "La lettre de motivation doit contenir au moins 20 caractères.")
       .max(3000, "La lettre de motivation ne doit pas dépasser 3000 caractères."),
-    statutPaiement: z.string("Le statut doit être 'Payé' ou 'Non payé'." ),
+      statutPaiement: z.enum(["Payé", "Non payé"]),
     datePaiement: z.string().optional().or(z.literal("")),
     dossierStorageId: z.string().optional(),
     dossierNom: z.string().optional(),

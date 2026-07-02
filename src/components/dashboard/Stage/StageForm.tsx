@@ -57,7 +57,7 @@ export function StageForm({ defaultValues, onSubmit, onCancel, submitLabel = "En
           numero: defaultValues.numero,
           niveau: defaultValues.niveau,
           lettreMotivation: defaultValues.lettreMotivation,
-          statutPaiement: defaultValues.statutPaiement,
+          statutPaiement: defaultValues.statutPaiement ,
           datePaiement: defaultValues.datePaiement ?? "",
         }
       : {

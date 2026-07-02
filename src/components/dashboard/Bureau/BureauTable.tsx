@@ -120,7 +120,7 @@ export function BureauTable({ membres, isLoading, hasSearch, onEdit, onDelete }:
                   {membre.niveauEtude}
                 </TableCell>
                 <TableCell>
-                  <Badge variant={membre.statut === "Présent" ? "success" : "secondary"}>
+                  <Badge variant="destructive">
                     {membre.statut}
                   </Badge>
                 </TableCell>

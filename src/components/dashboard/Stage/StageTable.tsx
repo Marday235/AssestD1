@@ -154,7 +154,7 @@ export function StageTable({
                       </Badge>
                     </button>
                   ) : (
-                    <Badge variant="success">{candidature.statutPaiement}</Badge>
+                    <Badge  variant='destructive' >{candidature.statutPaiement}</Badge>
                   )}
                   {candidature.statutPaiement === "Payé" && candidature.datePaiement && (
                     <p className="mt-1 text-xs text-muted-foreground">

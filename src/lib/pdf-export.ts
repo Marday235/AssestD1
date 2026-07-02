@@ -4,7 +4,7 @@ import { formatDate } from "@/lib/utils";
 
 // Palette "registre civique" du dashboard, en RGB pour jsPDF.
 const COULEUR_PRIMARY: [number, number, number] = [32, 33, 36];      // Anthracite
-const COULEUR_ACCENT: [number, number, number] = [37, 99, 235];      // Bleu
+// const COULEUR_ACCENT: [number, number, number] = [37, 99, 235];      // Bleu
 const COULEUR_MUTED: [number, number, number] = [107, 114, 128];     // Gris
 const COULEUR_LIGNE: [number, number, number] = [229, 231, 235];     // Gris clair    // Gris clair
 

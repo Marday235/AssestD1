@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import type { Id } from "../../convex/_generated/dataModel";
-import type { Collaborateur, CollaborateurFormValues } from "@/components/Collaborateurs/collaborateur.types";
+import type { Collaborateur, CollaborateurFormValues } from "@/components/dashboard/Collaborateurs/collaborateur.types";
 
 /**
  * Hook centralisant tous les accès Convex pour le module Collaborateurs.
