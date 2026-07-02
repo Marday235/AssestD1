@@ -1,3 +1,6 @@
+
+
+
 export default function FAQs() {
     return (
         <section className="scroll-py-16 py-16 md:scroll-py-32 md:py-32">

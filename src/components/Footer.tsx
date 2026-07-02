@@ -5,7 +5,6 @@ import {
   YoutubeIcon,
 } from "lucide-react";
 
-// import { Separator } from '@/components/ui/separator'
 
 import Logo from "./Logo";
 
@@ -68,9 +67,9 @@ const Footer = () => {
         <p className="text-center font-medium text-balance">
           {`©${new Date().getFullYear()}`}{" "}
           <a href="#" className="hover:underline">
-            shadcn/studio
+            ASEEST/D
           </a>
-          , Made with ❤️ for better web.
+          , Made with ❤️ for Marday235 .
         </p>
       </div>
     </footer>

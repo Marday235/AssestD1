@@ -1,28 +1,18 @@
-import "./App.css";
-import Team from "@/components/team";
-import AboutUs from "@/components/BlockAbout";
-import Gallery from "@/components/Gallery";
-import FAQs from "@/components/FAQs";
-import HeroSection from "@/components/HeroSection";
-import Footer from "@/components/Footer";
+import {  Navigate, Route, Routes } from "react-router-dom";
+import AdminPage from "@/pages/AdminPage";
+import PostulerPage from "@/pages/PostulerPage";
+import { Toaster } from "@/components/dashboard/ui/toaster";
+import Home from "./pages/Home";
 
-import { ThemeProvider } from "next-themes";
-function App() {
+export default function App() {
   return (
-    <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
-      {/* ton application */}
-      {/* <HeroColor/> */}
-      {/* <Navbar />
-      <Hero /> */}
-      <HeroSection />
-      <AboutUs />
-      <Gallery />
-      <Team />
-      {/* <Gallery6 /> */}
-      <FAQs />
-      <Footer />
-    </ThemeProvider>
+    <>
+      <Routes>
+        <Route path="/" element={<Home/>} />
+        <Route path="/postuler" element={<PostulerPage />} />
+        <Route path="/admin" element={<AdminPage />} />
+      </Routes>
+      <Toaster />
+    </>
   );
 }
-
-export default App;

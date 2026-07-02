@@ -1,0 +1,59 @@
+/* @layer components {
+  .admin-layout {
+    @apply min-h-screen bg-background;
+  }
+
+  .admin-container {
+    @apply mx-auto max-w-7xl px-6 py-8;
+  }
+
+  .admin-header {
+    @apply mb-8 flex items-center justify-between border-b border-border pb-4;
+  }
+
+  .admin-title {
+    @apply text-3xl font-bold text-primary;
+    font-family: "Fraunces", serif;
+  }
+
+  .admin-subtitle {
+    @apply text-muted-foreground;
+  }
+
+  .admin-card {
+    @apply rounded-xl border border-border bg-card p-6 shadow-sm transition-all;
+  }
+
+  .admin-card:hover {
+    @apply shadow-lg;
+    transform: translateY(-2px);
+  }
+
+  .admin-grid {
+    @apply grid gap-6 md:grid-cols-2 xl:grid-cols-4;
+  }
+
+  .admin-section {
+    @apply mt-8;
+  }
+
+  .admin-table {
+    @apply rounded-xl border border-border bg-card;
+  }
+
+  .admin-sidebar {
+    @apply bg-primary text-primary-foreground;
+  }
+
+  .admin-stat {
+    @apply rounded-xl border border-border bg-card p-5;
+  }
+
+  .admin-stat-value {
+    @apply text-3xl font-bold text-primary;
+  }
+
+  .admin-stat-label {
+    @apply text-sm text-muted-foreground;
+  }
+} */

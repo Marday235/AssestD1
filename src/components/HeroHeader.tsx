@@ -6,9 +6,10 @@ import { ModeToggle } from "@/components/ModeToggle";
 import React from "react";
 import { cn } from "@/lib/utils";
 
+
 const menuItems = [
-  { name: "Features", href: "#home" },
-  { name: "Pricing", href: "#link" },
+  { name: "Homme", href: "/" },
+  { name: "Stage", href: "/postuler" },
   { name: "About", href: "#about" },
   { name: "Our team", href: "#team" },
 ];

@@ -3,6 +3,7 @@ import { ArrowRight, ChevronRight } from 'lucide-react';
 // import { Button } from '@/components/ui/button';
 import { HeroHeader } from '../components/HeroHeader';
 
+
 // const transitionVariants = {
 //     item: {
 //         hidden: {
@@ -58,7 +59,7 @@ export default function HeroSection() {
                                 <a
                                     href="#link"
                                     className="hover:bg-background dark:hover:border-t-border bg-muted group mx-auto flex w-fit items-center gap-4 rounded-full border p-1 pl-4 shadow-md shadow-zinc-950/5 transition-colors duration-300 dark:border-t-white/5 dark:shadow-zinc-950">
-                                    <span className="text-foreground text-sm">Introducing Support for AI Models</span>
+                                    <span className="text-foreground text-sm">ASEEST/D</span>
                                     <span className="dark:border-background block h-4 w-0.5 border-l bg-white dark:bg-zinc-700"></span>
 
                                     <div className="bg-background group-hover:bg-muted size-6 overflow-hidden rounded-full duration-500">
@@ -105,7 +106,7 @@ export default function HeroSection() {
                             <a
                                 href="/"
                                 className="block text-sm duration-150 hover:opacity-75">
-                                <span> Meet Our Customers</span>
+                                <span> collaborateurs ASEEST/D</span>
 
                                 <ChevronRight className="ml-1 inline-block size-3" />
                             </a>
@@ -113,7 +114,7 @@ export default function HeroSection() {
                         <div className="group-hover:blur-xs mx-auto mt-12 grid max-w-2xl grid-cols-4 gap-x-12 gap-y-8 transition-all duration-500 group-hover:opacity-50 sm:gap-x-16 sm:gap-y-14">
                             <div className="flex">
                                 <img
-                                    className="mx-auto h-20 w-fit dark:invert "
+                                    className="mx-auto h-20 w-fit  "
                                     src="/Assestd.JPG"
                                     alt="Nvidia Logo"
                                     height="20"
@@ -123,7 +124,7 @@ export default function HeroSection() {
 
                             <div className="flex">
                                 <img
-                                    className="mx-auto h-20 w-fit dark:invert"
+                                    className="mx-auto h-20 w-fit "
                                     src="/Assestd.JPG"
                                     alt="Nvidia Logo"
                                     height="20"
@@ -132,7 +133,7 @@ export default function HeroSection() {
                             </div>
                             <div className="flex">
                                 <img
-                                    className="mx-auto h-20 w-fit dark:invert"
+                                    className="mx-auto h-20 w-fit "
                                     src="/Assestd.JPG"
                                     alt="Nvidia Logo"
                                     height="20"
@@ -141,7 +142,7 @@ export default function HeroSection() {
                             </div>
                             <div className="flex">
                                 <img
-                                    className="mx-auto h-20 w-fit dark:invert"
+                                    className="mx-auto h-20 w-fit "
                                     src="/Assestd.JPG"
                                     alt="Nvidia Logo"
                                     height="20"
@@ -150,7 +151,7 @@ export default function HeroSection() {
                             </div>
                             <div className="flex">
                                 <img
-                                    className="mx-auto h-20 w-fit dark:invert"
+                                    className="mx-auto h-20 w-fit "
                                     src="/Assestd.JPG"
                                     alt="Nvidia Logo"
                                     height="20"
@@ -159,7 +160,7 @@ export default function HeroSection() {
                             </div>
                             <div className="flex">
                                 <img
-                                    className="mx-auto h-20 w-fit dark:invert"
+                                    className="mx-auto h-20 w-fit "
                                     src="/Assestd.JPG"
                                     alt="Nvidia Logo"
                                     height="20"
@@ -168,7 +169,7 @@ export default function HeroSection() {
                             </div>
                             <div className="flex">
                                 <img
-                                    className="mx-auto h-20 w-fit dark:invert"
+                                    className="mx-auto h-20 w-fit "
                                     src="/Assestd.JPG"
                                     alt="Nvidia Logo"
                                     height="20"
@@ -178,7 +179,7 @@ export default function HeroSection() {
 
                             <div className="flex">
                                 <img
-                                    className="mx-auto h-20 w-fit dark:invert"
+                                    className="mx-auto h-20 w-fit "
                                     src="/Assestd.JPG"
                                     alt="Nvidia Logo"
                                     height="20"
