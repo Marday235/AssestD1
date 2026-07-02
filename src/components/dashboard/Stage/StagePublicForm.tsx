@@ -44,7 +44,6 @@ export function StagePublicForm({ onSubmit ,defaultValues }: StagePublicFormProp
             numero: defaultValues.numero,
             niveau: defaultValues.niveau,
             lettreMotivation: defaultValues.lettreMotivation,
-            statutPaiement: "non paye",
             datePaiement: defaultValues.datePaiement ?? "",
           }
         : {
