@@ -8,10 +8,10 @@ import { cn } from "@/lib/utils";
 
 
 const menuItems = [
-  { name: "Homme", href: "/" },
+  { name: "Home", href: "/" },
   { name: "Stage", href: "/postuler" },
-  { name: "About", href: "#about" },
-  { name: "Our team", href: "#team" },
+  { name: "A propos", href: "#about" },
+  { name: "Bureau", href: "#team" },
 ];
 
 export const HeroHeader = () => {

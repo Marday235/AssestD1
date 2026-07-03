@@ -15,7 +15,7 @@ export function BureauGrid() {
     <>
          <div className="mx-auto flex max-w-(--breakpoint-xl) items-center flex-col justify-center px-6 py-8 sm:pt-12 sm:pb-20 lg:px-8" id="team">
       <span className="font-semibold text-muted-foreground  text-sm uppercase">
-        Our team
+       Bureau exécutif de l'ASEEST/D
       </span>
 
       <div className="mt-14 grid w-full grid-cols-1 gap-8 sm:mt-20 sm:grid-cols-2 md:grid-cols-4 bg-transparent">

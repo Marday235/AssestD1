@@ -18,10 +18,12 @@ const AboutUs = () => {
       <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
         {/* Header */}
         <div className='mb-12 space-y-4 text-center md:mb-16 lg:mb-24'>
-          <h2 className='text-2xl font-semibold tracking-tight md:text-3xl lg:text-4xl'>About Us</h2>
+          <h2 className='text-2xl font-semibold tracking-tight md:text-3xl lg:text-4xl'>À propos</h2>
           <p className='text-muted-foreground text-xl'>
-            Our achievement story stands as a powerful testament to teamwork and perseverance. United, we have faced
-            challenges, celebrated victories, and woven a narrative of growth and success.
+            L'Association des Élèves, Étudiants et Stagiaires Tchadiens de Douala (ASEEST/D) est une organisation apolitique, à but non lucratif qui rassemble les élèves, étudiants et stagiaires tchadiens résidant dans la ville de Douala, au Cameroun.
+
+Créée dans un esprit de solidarité et de fraternité, l'ASEEST/D est légalement reconnue par l'État du Cameroun ainsi que par le Consulat Général de la République du Tchad à Douala. Depuis sa création,
+ elle œuvre pour l'épanouissement académique, social, culturel et professionnel de ses membres, tout en renforçant les liens d'amitié et de coopération entre les ressortissants tchadiens vivant à Douala.
           </p>
           <Button size='lg' asChild className='group rounded-lg text-base has-[>svg]:px-6'>
             <a href='#'>
