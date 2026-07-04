@@ -6,88 +6,48 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/dashboard/ui/select";
-import { FileUploader } from "@/components/dashboard/FileUploader";
-import {
-  MONTANT_STAGE,
-  STATUTS_PAIEMENT,
-  stageFormSchema,
-  type CandidatureStage,
-  type StageFormValues,
-} from "@/components/dashboard/Stage/stage.types";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/dashboard/ui/select";
+import { MultiImageUploader } from "@/components/dashboard/MultiImageUploader";
+import { MONTANT_STAGE, STATUTS_PAIEMENT, stageFormSchema, type CandidatureStage, type StageFormValues } from "@/components/dashboard/Stage/stage.types";
 import type { Id } from "../../../../convex/_generated/dataModel";
 
 interface StageFormProps {
   defaultValues?: CandidatureStage;
-  onSubmit: (
-    values: StageFormValues,
-    dossierStorageId?: Id<"_storage">,
-    dossierNom?: string
-  ) => Promise<void>;
+  onSubmit: (values: StageFormValues, photoStorageIds: Id<"_storage">[]) => Promise<void>;
   onCancel: () => void;
   submitLabel?: string;
 }
 
-/** Formulaire d'ajout/modification d'une candidature de stage. Validation via Zod. */
 export function StageForm({ defaultValues, onSubmit, onCancel, submitLabel = "Enregistrer" }: StageFormProps) {
-  const [dossierStorageId, setDossierStorageId] = useState<Id<"_storage"> | undefined>(
-    defaultValues?.dossierStorageId
-  );
-  const [dossierNom, setDossierNom] = useState<string | undefined>(defaultValues?.dossierNom);
+  const [photoStorageIds, setPhotoStorageIds] = useState<Id<"_storage">[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    watch,
-    formState: { errors },
-  } = useForm<StageFormValues>({
+  const { register, handleSubmit, setValue, watch, formState: { errors } } = useForm<StageFormValues>({
     resolver: zodResolver(stageFormSchema),
-    defaultValues: defaultValues
-      ? {
-          nom: defaultValues.nom,
-          age: defaultValues.age.toString(),
-          numero: defaultValues.numero,
-          niveau: defaultValues.niveau,
-          lettreMotivation: defaultValues.lettreMotivation,
-          statutPaiement: defaultValues.statutPaiement ,
-          datePaiement: defaultValues.datePaiement ?? "",
-        }
-      : {
-          statutPaiement: "Non payé",
-        },
+    defaultValues: defaultValues ? {
+      nom: defaultValues.nom, niveau: defaultValues.niveau,
+      numero: defaultValues.numero,
+      lettreMotivation: defaultValues.lettreMotivation,
+      statutPaiement: defaultValues.statutPaiement,
+      datePaiement: defaultValues.datePaiement ?? "",
+    } : { statutPaiement: "Non payé" },
   });
 
   const statutValue = watch("statutPaiement");
 
   async function handleFormSubmit(values: StageFormValues) {
     setIsSubmitting(true);
-    try {
-      await onSubmit(values, dossierStorageId, dossierNom);
-    } finally {
-      setIsSubmitting(false);
-    }
+    try { await onSubmit(values, photoStorageIds); }
+    finally { setIsSubmitting(false); }
   }
 
   return (
-    <form onSubmit={handleSubmit(handleFormSubmit)} className="flex flex-col gap-1">
-      <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+    <form onSubmit={handleSubmit(handleFormSubmit)} className="flex flex-col gap-2 ">
+      <div className="grid grid-cols-1 gap-1 sm:grid-cols-2">
         <div>
           <Label htmlFor="nom">Nom complet</Label>
-          <Input id="nom" {...register("nom")} placeholder="Nom et prénom du candidat" />
+          <Input id="nom" {...register("nom")} placeholder="Nom et prénom" />
           {errors.nom && <p className="mt-1 text-xs text-destructive">{errors.nom.message}</p>}
-        </div>
-        <div>
-          <Label htmlFor="age">Âge</Label>
-          <Input id="age"  {...register("age")} placeholder="22" />
-          {errors.age && <p className="mt-1 text-xs text-destructive">{errors.age.message}</p>}
         </div>
       </div>
 
@@ -103,78 +63,42 @@ export function StageForm({ defaultValues, onSubmit, onCancel, submitLabel = "En
         </div>
       <div>
         <Label htmlFor="lettreMotivation">Lettre de motivation</Label>
-        <Textarea
-          id="lettreMotivation"
-          {...register("lettreMotivation")}
-          placeholder="Contenu ou résumé de la lettre de motivation…"
-          rows={5}
-        />
-        {errors.lettreMotivation && (
-          <p className="mt-1 text-xs text-destructive">{errors.lettreMotivation.message}</p>
-        )}
+        <Textarea id="lettreMotivation" {...register("lettreMotivation")} placeholder="Contenu de la lettre…" rows={4} />
+        {errors.lettreMotivation && <p className="mt-1 text-xs text-destructive">{errors.lettreMotivation.message}</p>}
       </div>
 
       <div>
-        <Label className="mb-2 block">Dossier (CV, diplôme… au format PDF)</Label>
-        <FileUploader
-          currentFileName={defaultValues?.dossierNom}
-          currentFileUrl={defaultValues?.dossierUrl}
-          onUploaded={(storageId, fileName) => {
-            setDossierStorageId(storageId);
-            setDossierNom(fileName);
-          }}
-          onClear={() => {
-            setDossierStorageId(undefined);
-            setDossierNom(undefined);
-          }}
-        />
+        <Label className="mb-2 block">Documents / Photos du dossier</Label>
+        <MultiImageUploader onUploaded={setPhotoStorageIds} />
       </div>
 
       <div className="rounded-lg border border-border bg-muted/40 p-3">
         <div className="flex items-center justify-between">
-          <span className="text-sm font-medium">Frais de dossier à payer</span>
+          <span className="text-sm font-medium">Frais de dossier</span>
           <span className="font-display text-lg font-semibold text-accent">{MONTANT_STAGE} FR</span>
         </div>
-
-        <div className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-2">
+        <div className="mt-2 grid grid-cols-1 gap-2 sm:grid-cols-2">
           <div>
             <Label className="mb-1.5 block">Statut de paiement</Label>
-            <Select
-              value={statutValue}
-              onValueChange={(value) => setValue("statutPaiement", value as StageFormValues["statutPaiement"])}
-            >
-              <SelectTrigger>
-                <SelectValue placeholder="Sélectionner un statut" />
-              </SelectTrigger>
+            <Select value={statutValue} onValueChange={(v) => setValue("statutPaiement", v as StageFormValues["statutPaiement"])}>
+              <SelectTrigger><SelectValue /></SelectTrigger>
               <SelectContent>
-                {STATUTS_PAIEMENT.map((statut) => (
-                  <SelectItem key={statut} value={statut}>
-                    {statut}
-                  </SelectItem>
-                ))}
+                {STATUTS_PAIEMENT.map((s) => <SelectItem key={s} value={s}>{s}</SelectItem>)}
               </SelectContent>
             </Select>
-            {errors.statutPaiement && (
-              <p className="mt-1 text-xs text-destructive">{errors.statutPaiement.message}</p>
-            )}
           </div>
           <div>
             <Label htmlFor="datePaiement">Date de paiement</Label>
             <Input id="datePaiement" type="date" {...register("datePaiement")} />
-            {errors.datePaiement && (
-              <p className="mt-1 text-xs text-destructive">{errors.datePaiement.message}</p>
-            )}
+            {errors.datePaiement && <p className="mt-1 text-xs text-destructive">{errors.datePaiement.message}</p>}
           </div>
         </div>
       </div>
 
-      <div className="mt-2 flex flex-col-reverse gap-1.5 sm:flex-row sm:justify-end">
-        <Button type="button" variant="outline" onClick={onCancel} disabled={isSubmitting}>
-          Annuler
-        </Button>
+      <div className="mt-2 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
+        <Button type="button" variant="outline" onClick={onCancel} disabled={isSubmitting}>Annuler</Button>
         <Button type="submit" disabled={isSubmitting}>
-          {isSubmitting && <Loader2 className="h-4 w-4 animate-spin" />}
-          {submitLabel}
+          {isSubmitting && <Loader2 className="h-4 w-4 animate-spin" />}{submitLabel}
         </Button>
       </div>
     </form>

@@ -108,7 +108,7 @@ export function BureauTable({ membres, isLoading, hasSearch, onEdit, onDelete }:
                       <p className="font-medium leading-tight">
                         {membre.prenom} {membre.nom}
                       </p>
-                      <p className="text-xs text-muted-foreground">{membre.age} ans</p>
+                      <p className="text-xs text-muted-foreground">{membre.niveauEtude}</p>
                     </div>
                   </div>
                 </TableCell>

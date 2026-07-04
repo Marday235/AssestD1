@@ -1,30 +1,20 @@
 import { useState } from "react";
 import { CheckCircle2, GraduationCap } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/dashboard/ui/card";
 import { useStages } from "@/hooks/useStages";
 import { StagePublicForm } from "@/components/dashboard/Stage/StagePublicForm";
 import type { StagePublicFormValues } from "@/components/dashboard/Stage/stage.types";
 import type { Id } from "../../convex/_generated/dataModel";
-import { HeroHeader } from "@/components/HeroHeader";
 
-/**
- * Page publique de dépôt de candidature de stage. Accessible à tous,
- * sans authentification ni accès à l'espace admin.
- */
 export default function PostulerPage() {
-  const { create } = useStages();
+  const { createPublic } = useStages();
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  async function handleSubmit(
-    values: StagePublicFormValues,
-    dossierStorageId?: Id<"_storage">,
-    dossierNom?: string
-  ) {
+  async function handleSubmit(values: StagePublicFormValues, photoStorageIds: Id<"_storage">[]) {
     setError(null);
     try {
-      await create(values, dossierStorageId, dossierNom);
+      await createPublic(values, photoStorageIds);
       setIsSubmitted(true);
     } catch {
       setError("Une erreur est survenue lors de l'envoi. Réessaie dans quelques instants.");
@@ -33,54 +23,50 @@ export default function PostulerPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <HeroHeader />
-      <header className="border-b border-border bg-card">
-        <div className="container flex items-center gap-3 py-5 mt-3">
-          <div className="seal-mark flex h-10 w-10 items-center justify-center rounded-full bg-primary text-primary-foreground">
+      {/* Header compact mobile */}
+      <header className="sticky top-0 z-10 border-b border-border bg-card/95 backdrop-blur-sm">
+        <div className="flex items-center gap-3 px-4 py-3">
+          <div className="flex h-9 w-9 items-center justify-center rounded-full bg-primary text-primary-foreground shrink-0">
             <GraduationCap className="h-5 w-5" />
           </div>
           <div>
-            <h1 className="font-display text-xl font-semibold leading-tight">Candidature de stage</h1>
-            <p className="text-xs text-muted-foreground">Association — Espace candidats</p>
+            <p className="font-semibold leading-tight text-sm">Candidature de stage</p>
+            <p className="text-xs text-muted-foreground">Remplis le formulaire ci-dessous</p>
           </div>
         </div>
       </header>
 
-      <main className="container max-w-2xl py-10 sm:py-14">
+      <main className="px-4 py-6 pb-12 max-w-xl mx-auto">
         {isSubmitted ? (
-          <Card>
-            <CardContent className="flex flex-col items-center gap-3 p-10 text-center">
-              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-success/15">
-                <CheckCircle2 className="h-7 w-7 text-success" />
-              </div>
-              <h2 className="font-display text-xl font-semibold">Candidature envoyée !</h2>
-              <p className="max-w-md text-sm text-muted-foreground">
-                Merci pour ta candidature. Notre équipe va l'étudier et te recontactera prochainement
-                avec les modalités de paiement des frais de dossier.
-              </p>
-              <Button variant="outline" className="mt-2" onClick={() => setIsSubmitted(false)}>
-                Déposer une autre candidature
-              </Button>
-            </CardContent>
-          </Card>
-        ) : (
-          <>
-            <div className="mb-6">
-              <h2 className="font-display text-2xl font-semibold tracking-tight">
-                Postule pour un stage
-              </h2>
-              <p className="mt-1 text-sm text-muted-foreground">
-                Remplis le formulaire ci-dessous pour déposer ta candidature. Tous les champs sont
-                requis.
+          /* Confirmation */
+          <div className="flex flex-col items-center gap-5 py-12 text-center">
+            <div className="flex h-20 w-20 items-center justify-center rounded-full bg-success/15">
+              <CheckCircle2 className="h-10 w-10 text-success" />
+            </div>
+            <div className="space-y-2">
+              <h2 className="font-display text-2xl font-semibold">Candidature envoyée !</h2>
+              <p className="text-muted-foreground max-w-xs">
+                Merci ! Notre équipe va étudier ton dossier et te recontacter prochainement.
               </p>
             </div>
+            <Button variant="outline" className="mt-2 h-12 w-full text-base" onClick={() => setIsSubmitted(false)}>
+              Déposer une autre candidature
+            </Button>
+          </div>
+        ) : (
+          <>
+            <div className="mb-6 space-y-1">
+              <h1 className="font-display text-2xl font-semibold">Postule pour un stage</h1>
+              <p className="text-sm text-muted-foreground">Tous les champs sont requis.</p>
+            </div>
 
-            <Card>
-              <CardContent className="p-5 sm:p-6">
-                <StagePublicForm onSubmit={handleSubmit} />
-                {error && <p className="mt-3 text-sm text-destructive">{error}</p>}
-              </CardContent>
-            </Card>
+            <StagePublicForm onSubmit={handleSubmit} />
+
+            {error && (
+              <p className="mt-4 rounded-lg bg-destructive/10 p-3 text-sm text-destructive">
+                {error}
+              </p>
+            )}
           </>
         )}
       </main>

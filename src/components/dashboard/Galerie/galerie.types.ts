@@ -30,3 +30,4 @@ export interface EvenementGalerie {
   nombrePhotos: number;
   couvertureUrl: string | null;
 }
+

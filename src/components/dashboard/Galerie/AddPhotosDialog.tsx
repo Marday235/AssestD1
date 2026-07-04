@@ -15,20 +15,20 @@ import type { Id } from "../../../../convex/_generated/dataModel";
 interface AddPhotosDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  evenement: EvenementGalerie | null;
+  evenementsAdmin: EvenementGalerie | null;
   onSubmit: (evenementId: Id<"evenements_galerie">, storageIds: Id<"_storage">[]) => Promise<void>;
 }
 
 /** Dialog pour ajouter plusieurs photos à un événement existant. */
-export function AddPhotosDialog({ open, onOpenChange, evenement, onSubmit }: AddPhotosDialogProps) {
+export function AddPhotosDialog({ open, onOpenChange, evenementsAdmin, onSubmit }: AddPhotosDialogProps) {
   const [storageIds, setStorageIds] = useState<Id<"_storage">[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   async function handleSubmit() {
-    if (!evenement || storageIds.length === 0) return;
+    if (!evenementsAdmin || storageIds.length === 0) return;
     setIsSubmitting(true);
     try {
-      await onSubmit(evenement._id, storageIds);
+      await onSubmit(evenementsAdmin._id, storageIds);
       setStorageIds([]);
       onOpenChange(false);
     } finally {
@@ -42,8 +42,8 @@ export function AddPhotosDialog({ open, onOpenChange, evenement, onSubmit }: Add
         <DialogHeader>
           <DialogTitle>Ajouter des photos</DialogTitle>
           <DialogDescription>
-            {evenement ? (
-              <>Ajouter des photos à <strong>{evenement.nom}</strong></>
+            {evenementsAdmin ? (
+              <>Ajouter des photos à <strong>{evenementsAdmin.nom}</strong></>
             ) : (
               "Sélectionne les photos à ajouter."
             )}

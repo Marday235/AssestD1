@@ -1,14 +1,18 @@
 import { useMutation, useQuery } from "convex/react";
 import { api } from "./../../convex/_generated/api";
 import type { Id } from "./../../convex/_generated/dataModel";
-import type { EvenementFormValues, EvenementGalerie } from "@/components/dashboard/Galerie/galerie.types";
+import type { EvenementFormValues, EvenementGalerie, PhotoAvecUrl } from "@/components/dashboard/Galerie/galerie.types";
 
 /**
  * Hook centralisant tous les accès Convex pour le module Galerie.
  * Architecture : Événements (conteneurs) + Photos (plusieurs par événement).
  */
 export function useGalerie() {
-  const evenements = useQuery(api.galerie.getAllEvenements) as EvenementGalerie[] | undefined;
+  const photosHasard = useQuery(api.galerie.getPhotosHasard) as PhotoAvecUrl[] | undefined;
+  const evenementsAdmin = useQuery(api.galerie.getAllEvenements) as EvenementGalerie[] | undefined;
+
+  
+
 
   const createEvenementMutation = useMutation(api.galerie.createEvenement);
   const updateEvenementMutation = useMutation(api.galerie.updateEvenement);
@@ -41,8 +45,9 @@ export function useGalerie() {
   }
 
   return {
-    evenements,
-    isLoading: evenements === undefined,
+    photosHasard,
+    evenementsAdmin,
+    isLoading: photosHasard === undefined,
     createEvenement,
     updateEvenement,
     removeEvenement,

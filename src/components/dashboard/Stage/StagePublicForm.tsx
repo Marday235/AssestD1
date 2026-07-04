@@ -6,131 +6,97 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { FileUploader } from "@/components/dashboard/FileUploader";
-import {
-  MONTANT_STAGE,
-  stagePublicFormSchema,
-  type CandidatureStage,
-  type StagePublicFormValues,
-} from "@/components/dashboard/Stage/stage.types";
+import { MultiImageUploader } from "@/components/dashboard/MultiImageUploader";
+import { MONTANT_STAGE, stagePublicFormSchema, type StagePublicFormValues } from "@/components/dashboard/Stage/stage.types";
 import type { Id } from "../../../../convex/_generated/dataModel";
 
 interface StagePublicFormProps {
-  defaultValues?: CandidatureStage;
-  onSubmit: (
-    values: StagePublicFormValues,
-    dossierStorageId?: Id<"_storage">,
-    dossierNom?: string
-  ) => Promise<void>;
+  onSubmit: (values: StagePublicFormValues, photoStorageIds: Id<"_storage">[]) => Promise<void>;
 }
 
-/** Formulaire public de dépôt de candidature de stage, sans gestion du paiement. */
-export function StagePublicForm({ onSubmit ,defaultValues }: StagePublicFormProps) {
-  const [dossierStorageId, setDossierStorageId] = useState<Id<"_storage"> | undefined>(undefined);
-  const [dossierNom, setDossierNom] = useState<string | undefined>(undefined);
+export function StagePublicForm({ onSubmit }: StagePublicFormProps) {
+  const [photoStorageIds, setPhotoStorageIds] = useState<Id<"_storage">[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm<StagePublicFormValues>({
-      resolver: zodResolver(stagePublicFormSchema),
-      defaultValues: defaultValues
-        ? {
-            nom: defaultValues.nom,
-            age: defaultValues.age.toString(),
-            numero: defaultValues.numero,
-            niveau: defaultValues.niveau,
-            lettreMotivation: defaultValues.lettreMotivation,
-            datePaiement: defaultValues.datePaiement ?? "",
-          }
-        : {
-            statutPaiement: "Non payé",
-          },
-    });
+  const { register, handleSubmit, reset, formState: { errors } } = useForm<StagePublicFormValues>({
+    resolver: zodResolver(stagePublicFormSchema),
+  });
 
   async function handleFormSubmit(values: StagePublicFormValues) {
     setIsSubmitting(true);
     try {
-      await onSubmit(values, dossierStorageId, dossierNom);
+      await onSubmit(values, photoStorageIds);
       reset();
-      setDossierStorageId(undefined);
-      setDossierNom(undefined);
+      setPhotoStorageIds([]);
     } finally {
       setIsSubmitting(false);
     }
   }
 
-  
-
   return (
-    <form onSubmit={handleSubmit(handleFormSubmit)} className="flex flex-col gap-4">
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        <div>
-          <Label htmlFor="nom">Nom complet</Label>
-          <Input id="nom" {...register("nom")} placeholder="Ton nom et prénom" />
-          {errors.nom && <p className="mt-1 text-xs text-destructive">{errors.nom.message}</p>}
+    <form onSubmit={handleSubmit(handleFormSubmit)} className="flex flex-col gap-5">
+      {/* Nom */}
+      <div className="space-y-1.5">
+        <Label htmlFor="nom" className="text-base font-semibold">Nom complet</Label>
+        <Input id="nom" {...register("nom")} placeholder="Ton nom et prénom"
+          className="h-12 text-base" autoComplete="name" />
+        {errors.nom && <p className="text-sm text-destructive">{errors.nom.message}</p>}
+      </div>
+
+      {/* Âge + Niveau côte à côte sur mobile */}
+      <div className="grid grid-cols-2 gap-2">
+        <div className="space-y-1.5">
+          <Label htmlFor="age" className="text-base font-semibold">Numero</Label>
+          <Input id="numero" type="number" inputMode="numeric" {...register("numero")}
+            placeholder="237 600000000" className="h-12 text-base" />
+          {errors.numero && <p className="text-sm text-destructive">{errors.numero.message}</p>}
         </div>
-        <div>
-          <Label htmlFor="age">Âge</Label>
-          <Input id="age" type="number" {...register("age")} placeholder="22" />
-          {errors.age && <p className="mt-1 text-xs text-destructive">{errors.age.message}</p>}
+        <div className="space-y-1.5">
+          <Label htmlFor="niveau" className="text-base font-semibold">Niveau</Label>
+          <Input id="niveau" {...register("niveau")} placeholder="Licence 3…"
+            className="h-12 text-base" />
+          {errors.niveau && <p className="text-sm text-destructive">{errors.niveau.message}</p>}
         </div>
       </div>
 
-      <div>
-        <Label htmlFor="niveau">Niveau d'étude</Label>
-        <Input id="niveau" {...register("niveau")} placeholder="Ex : Licence 3, Master 1…" />
-        {errors.niveau && <p className="mt-1 text-xs text-destructive">{errors.niveau.message}</p>}
-      </div>
-      <div>
-          <Label htmlFor="numero">Numéro</Label>
-          <Input id="numero" {...register("numero")} placeholder="N°" />
-          {errors.numero && <p className="mt-1 text-xs text-destructive">{errors.numero.message}</p>}
-        </div>
-      <div>
-        <Label htmlFor="lettreMotivation">Lettre de motivation</Label>
-        <Textarea
-          id="lettreMotivation"
-          {...register("lettreMotivation")}
+      {/* Lettre de motivation */}
+      <div className="space-y-1.5">
+        <Label htmlFor="lettreMotivation" className="text-base font-semibold">
+          Lettre de motivation
+        </Label>
+        <Textarea id="lettreMotivation" {...register("lettreMotivation")}
           placeholder="Explique pourquoi tu souhaites faire ce stage avec nous…"
-          rows={6}
-        />
-        {errors.lettreMotivation && (
-          <p className="mt-1 text-xs text-destructive">{errors.lettreMotivation.message}</p>
-        )}
+          rows={6} className="text-base resize-none" />
+        {errors.lettreMotivation && <p className="text-sm text-destructive">{errors.lettreMotivation.message}</p>}
       </div>
 
-      <div>
-        <Label className="mb-2 block">Dossier (CV, diplôme… au format PDF)</Label>
-        <FileUploader
-          onUploaded={(storageId, fileName) => {
-            setDossierStorageId(storageId);
-            setDossierNom(fileName);
-          }}
-          onClear={() => {
-            setDossierStorageId(undefined);
-            setDossierNom(undefined);
-          }}
-          label="Joindre mon dossier PDF"
-        />
+      {/* Photos du dossier */}
+      <div className="space-y-1.5">
+        <Label className="text-base font-semibold">
+          Photos du dossier{" "}
+          <span className="font-normal text-muted-foreground text-sm">(CV, diplômes, etc.)</span>
+        </Label>
+        <MultiImageUploader onUploaded={setPhotoStorageIds} />
       </div>
 
-      <div className="rounded-lg border border-accent/30 bg-accent/10 p-3 text-sm">
-        <p className="font-medium text-accent-foreground">
-          Des frais de dossier de <span className="font-semibold">{MONTANT_STAGE} FR</span> sont à
-          régler une fois ta candidature étudiée.
+      {/* Info frais */}
+      <div className="rounded-xl border border-accent/30 bg-accent/10 p-4">
+        <p className="font-semibold text-accent-foreground">
+          Frais de dossier :{" "}
+          <span className="text-lg">{MONTANT_STAGE} FR</span>
         </p>
-        <p className="mt-1 text-muted-foreground">
-          Tu seras recontacté(e) avec les modalités de paiement après l'étude de ton dossier.
+        <p className="mt-1 text-sm text-muted-foreground">
+          À régler une fois ta candidature étudiée. Tu seras recontacté(e) avec les modalités.
         </p>
       </div>
 
-      <Button type="submit" size="lg" disabled={isSubmitting} className="mt-2">
-        {isSubmitting ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
-        {isSubmitting ? "Envoi en cours…" : "Envoyer ma candidature"}
+      {/* Bouton */}
+      <Button type="submit" size="lg" disabled={isSubmitting}
+        className="h-14 w-full text-base font-semibold">
+        {isSubmitting
+          ? <><Loader2 className="h-5 w-5 animate-spin" /> Envoi en cours…</>
+          : <><Send className="h-5 w-5" /> Envoyer ma candidature</>
+        }
       </Button>
     </form>
   );

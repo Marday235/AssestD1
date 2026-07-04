@@ -49,7 +49,6 @@ export function BureauForm({ defaultValues, onSubmit, onCancel, submitLabel = "E
           nom: defaultValues.nom,
           prenom: defaultValues.prenom,
           telephone: defaultValues.telephone,
-          age: defaultValues.age,
           role: defaultValues.role,
           niveauEtude: defaultValues.niveauEtude,
           statut: defaultValues.statut,
@@ -102,11 +101,6 @@ export function BureauForm({ defaultValues, onSubmit, onCancel, submitLabel = "E
           <Label htmlFor="telephone">Téléphone</Label>
           <Input id="telephone" {...register("telephone")} placeholder="+237 6 00 00 00 00" />
           {errors.telephone && <p className="mt-1 text-xs text-destructive">{errors.telephone.message}</p>}
-        </div>
-        <div>
-          <Label htmlFor="age">Âge</Label>
-          <Input {...register("age")} />
-          {errors.age && <p className="mt-1 text-xs text-destructive">{errors.age.message}</p>}
         </div>
       </div>
 

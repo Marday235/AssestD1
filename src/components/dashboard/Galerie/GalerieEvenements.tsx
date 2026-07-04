@@ -37,7 +37,7 @@ import type { EvenementGalerie, PhotoAvecUrl } from "@/components/dashboard/Gale
 import type { Id } from "../../../../convex/_generated/dataModel";
 
 interface GalerieEvenementsProps {
-  evenements: EvenementGalerie[] | undefined;
+  evenementsAdmin: EvenementGalerie[] | undefined;
   isLoading: boolean;
   hasSearch: boolean;
   onEdit: (evenement: EvenementGalerie) => void;
@@ -187,7 +187,7 @@ function Lightbox({
 
 /** Grille des événements photos avec lightbox et actions de gestion. */
 export function GalerieEvenements({
-  evenements,
+  evenementsAdmin,
   isLoading,
   hasSearch,
   onEdit,
@@ -208,8 +208,10 @@ export function GalerieEvenements({
       </div>
     );
   }
+  console.log(evenementsAdmin);
+  
 
-  if (!evenements || evenements.length === 0) {
+  if (!evenementsAdmin || evenementsAdmin.length === 0) {
     return (
       <EmptyState
         icon={Images}
@@ -237,7 +239,7 @@ export function GalerieEvenements({
   return (
     <>
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {evenements.map((evt) => (
+        {evenementsAdmin.map((evt) => (
           <Card key={evt._id} className="overflow-hidden">
             {/* Mosaïque de couverture */}
             <div

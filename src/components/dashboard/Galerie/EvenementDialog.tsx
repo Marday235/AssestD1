@@ -20,7 +20,7 @@ import type { Id } from "../../../../convex/_generated/dataModel";
 interface EvenementDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  evenement?: EvenementGalerie;
+  evenementsAdmin?: EvenementGalerie;
   onSubmit: (
     values: EvenementFormValues,
     storageIds: Id<"_storage">[]
@@ -28,8 +28,8 @@ interface EvenementDialogProps {
 }
 
 /** Dialog pour créer un événement photo ou en modifier les infos + ajouter des photos. */
-export function EvenementDialog({ open, onOpenChange, evenement, onSubmit }: EvenementDialogProps) {
-  const isEditing = Boolean(evenement);
+export function EvenementDialog({ open, onOpenChange, evenementsAdmin, onSubmit }: EvenementDialogProps) {
+  const isEditing = Boolean(evenementsAdmin);
   const [storageIds, setStorageIds] = useState<Id<"_storage">[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -40,8 +40,8 @@ export function EvenementDialog({ open, onOpenChange, evenement, onSubmit }: Eve
     formState: { errors },
   } = useForm<EvenementFormValues>({
     resolver: zodResolver(evenementFormSchema),
-    values: evenement
-      ? { nom: evenement.nom, description: evenement.description ?? "", date: evenement.date }
+    values: evenementsAdmin
+      ? { nom: evenementsAdmin.nom, description: evenementsAdmin.description ?? "", date: evenementsAdmin.date }
       : undefined,
   });
 

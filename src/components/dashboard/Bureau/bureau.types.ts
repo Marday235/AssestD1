@@ -12,7 +12,6 @@ export const bureauFormSchema = z.object({
     .string()
     .min(8, "Le numéro de téléphone est trop court.")
     .regex(/^[0-9+\s()-]+$/, "Format de téléphone invalide."),
-  age: z.string(),
   role: z.string().min(2, "Le rôle est requis."),
   niveauEtude: z.string().min(2, "Le niveau d'étude est requis."),
   statut: z.enum(["Présent", "Ancien"]),

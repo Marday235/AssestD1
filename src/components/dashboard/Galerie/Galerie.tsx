@@ -12,7 +12,7 @@ import type { Id } from "../../../../convex/_generated/dataModel";
 
 /** Module Galerie : événements photo avec upload multiple de photos par événement. */
 export function Galerie() {
-  const { evenements, isLoading, createEvenement, updateEvenement, removeEvenement, addPhotos, removePhoto } = useGalerie();
+  const { evenementsAdmin, isLoading, createEvenement, updateEvenement, removeEvenement, addPhotos, removePhoto } = useGalerie();
   const { toast } = useToast();
 
   const [search, setSearch] = useState("");
@@ -21,11 +21,11 @@ export function Galerie() {
   const [addPhotosEvenement, setAddPhotosEvenement] = useState<EvenementGalerie | null>(null);
 
   const filtered = useMemo(() => {
-    if (!evenements) return evenements;
+    if (!evenementsAdmin) return evenementsAdmin;
     const q = search.trim().toLowerCase();
-    if (!q) return evenements;
-    return evenements.filter((e) => e.nom.toLowerCase().includes(q));
-  }, [evenements, search]);
+    if (!q) return evenementsAdmin;
+    return evenementsAdmin.filter((e) => e.nom.toLowerCase().includes(q));
+  }, [evenementsAdmin, search]);
 
   function handleCreate() {
     setEditingEvenement(undefined);
@@ -105,7 +105,7 @@ export function Galerie() {
       <SearchBar value={search} onChange={setSearch} placeholder="Rechercher un événement…" />
 
       <GalerieEvenements
-        evenements={filtered}
+        evenementsAdmin={filtered}
         isLoading={isLoading}
         hasSearch={search.trim().length > 0}
         onEdit={handleEdit}
@@ -117,14 +117,14 @@ export function Galerie() {
       <EvenementDialog
         open={evenementDialogOpen}
         onOpenChange={setEvenementDialogOpen}
-        evenement={editingEvenement}
+        evenementsAdmin={editingEvenement}
         onSubmit={handleEvenementSubmit}
       />
 
       <AddPhotosDialog
         open={addPhotosEvenement !== null}
         onOpenChange={(open) => !open && setAddPhotosEvenement(null)}
-        evenement={addPhotosEvenement}
+        evenementsAdmin={addPhotosEvenement}
         onSubmit={handleAddPhotos}
       />
     </div>

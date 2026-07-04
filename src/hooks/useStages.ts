@@ -1,97 +1,61 @@
 import { useMutation, useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import type { Id } from "../../convex/_generated/dataModel";
-import type { CandidatureStage, StageFormValues } from "@/components/dashboard/Stage/stage.types";
+import type { CandidatureStage, StageFormValues, StagePublicFormValues } from "@/components/dashboard/Stage/stage.types";
 
-/**
- * Hook centralisant tous les accès Convex pour le module Stage (candidatures).
- * Aucun composant ne doit appeler useQuery/useMutation directement.
- */
 export function useStages() {
   const candidatures = useQuery(api.stages.getAll) as CandidatureStage[] | undefined;
   const createMutation = useMutation(api.stages.create);
   const updateMutation = useMutation(api.stages.update);
   const removeMutation = useMutation(api.stages.remove);
+  const markAsPaidMutation = useMutation(api.stages.markAsPaid);
+  const addPhotosMutation = useMutation(api.stages.addPhotos);
+  const removePhotoMutation = useMutation(api.stages.removePhoto);
 
-
-  async function create(
-    values: StageFormValues,
-    dossierStorageId?: Id<"_storage">,
-    dossierNom?: string
-  ) {
+  async function create(values: StageFormValues, photoStorageIds?: Id<"_storage">[]) {
     await createMutation({
-      nom: values.nom,
-      age: values.age,
-      numero: values.numero,
-      niveau: values.niveau,
+      nom: values.nom,  numero: values.numero, niveau: values.niveau,
       lettreMotivation: values.lettreMotivation,
-      statutPaiement : values.statutPaiement ?? "Non payé",
       datePaiement: values.datePaiement || undefined,
-      dossierStorageId,
-      dossierNom,
+      photoStorageIds,
     });
   }
 
-  async function update(
-    id: Id<"stages">,
-    values: StageFormValues,
-    dossierStorageId?: Id<"_storage">,
-    dossierNom?: string
-  ) {
+  async function createPublic(values: StagePublicFormValues, photoStorageIds?: Id<"_storage">[]) {
+    await createMutation({
+      nom: values.nom,   numero: values.numero, niveau: values.niveau,
+      lettreMotivation: values.lettreMotivation,
+      photoStorageIds,
+    });
+  }
+
+  async function update(id: Id<"stages">, values: StageFormValues) {
     await updateMutation({
-      id,
-      nom: values.nom,
-      age: values.age,
-      numero: values.numero,
-      niveau: values.niveau,
+      id, nom: values.nom,   numero: values.numero, niveau: values.niveau,
       lettreMotivation: values.lettreMotivation,
-     statutPaiement : values.statutPaiement ?? "Non payé",
+      statutPaiement: values.statutPaiement,
       datePaiement: values.datePaiement || undefined,
-      dossierStorageId,
-      dossierNom,
     });
   }
-  async function createPublic(
-    values: StageFormValues,
-    dossierStorageId?: Id<"_storage">,
-    dossierNom?: string
-  ) {
-    await createMutation({
-      nom: values.nom,
-      age: values.age,
-      numero: values.numero,
-      niveau: values.niveau,
-      lettreMotivation: values.lettreMotivation,
-      statutPaiement: "Non payé",
-      dossierStorageId,
-      dossierNom,
-    });
+
+  async function markAsPaid(id: Id<"stages">) {
+    await markAsPaidMutation({ id });
   }
-    async function markAsPaid(candidature: CandidatureStage) {
-      await updateMutation({
-        id: candidature._id,
-        nom: candidature.nom,
-        numero: candidature.numero.toString(),
-        age: candidature.age.toString(),
-        niveau: candidature.niveau,
-        lettreMotivation: candidature.lettreMotivation,
-        statutPaiement: "Payé",
-        datePaiement: new Date().toISOString().slice(0, 10),
-        dossierStorageId: candidature.dossierStorageId,
-        dossierNom: candidature.dossierNom,
-      });
-    }
+
+  async function addPhotos(stageId: Id<"stages">, photoStorageIds: Id<"_storage">[]) {
+    await addPhotosMutation({ stageId, photoStorageIds });
+  }
+
+  async function removePhoto(id: Id<"stage_photos">) {
+    await removePhotoMutation({ id });
+  }
+
   async function remove(id: Id<"stages">) {
     await removeMutation({ id });
   }
 
   return {
-    candidatures,
-    isLoading: candidatures === undefined,
-    create,
-    update,
-    remove,
-    createPublic,
-    markAsPaid
+    candidatures, isLoading: candidatures === undefined,
+    create, createPublic, update, markAsPaid, addPhotos, removePhoto, remove,
   };
 }

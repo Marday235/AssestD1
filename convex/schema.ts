@@ -6,7 +6,6 @@ export default defineSchema({
     nom: v.string(),
     prenom: v.string(),
     telephone: v.string(),
-    age: v.string(),
     photoStorageId: v.optional(v.id("_storage")),
     photoUrl: v.optional(v.string()),
     role: v.string(),
@@ -53,17 +52,19 @@ export default defineSchema({
 
   stages: defineTable({
     nom: v.string(),
-    age: v.string(),
-    numero: v.string(),
     niveau: v.string(),
+    numero: v.string(),
     lettreMotivation: v.string(),
-    dossierStorageId: v.optional(v.id("_storage")),
-    dossierUrl: v.optional(v.string()),
-    dossierNom: v.optional(v.string()),
     montant: v.number(),
     statutPaiement: v.union(v.literal("Payé"), v.literal("Non payé")),
     datePaiement: v.optional(v.string()),
   })
     .index("by_statutPaiement", ["statutPaiement"])
     .index("by_nom", ["nom"]),
+
+  stage_photos: defineTable({
+    stageId: v.id("stages"),
+    imageStorageId: v.id("_storage"),
+    ordre: v.number(),
+  }).index("by_stage", ["stageId"]),
 });

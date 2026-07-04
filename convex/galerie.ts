@@ -37,6 +37,33 @@ export const getAllEvenements = query({
     );
   },
 });
+export const getPhotosHasard = query({
+  args: {},
+  handler: async (ctx) => {
+    const photos = await ctx.db
+      .query("galerie")
+      .collect();
+
+    const photosAvecUrl = await Promise.all(
+      photos.map(async (photo) => ({
+        ...photo,
+        imageUrl: await ctx.storage.getUrl(photo.imageStorageId),
+      }))
+    );
+
+    // Mélange Fisher-Yates
+    for (let i = photosAvecUrl.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [photosAvecUrl[i], photosAvecUrl[j]] = [
+        photosAvecUrl[j],
+        photosAvecUrl[i],
+      ];
+    }
+
+    // Retourne seulement 8 photos
+    return photosAvecUrl.slice(0, 10);
+  },
+});
 
 export const createEvenement = mutation({
   args: {

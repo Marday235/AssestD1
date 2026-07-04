@@ -112,7 +112,7 @@ export function MultiImageUploader({ onUploaded, className }: MultiImageUploader
   const isUploading = images.some((img) => img.uploading);
 
   return (
-    <div className={cn("flex flex-col gap-3", className)}>
+    <div className={cn("flex flex-col gap-1", className)}>
       <input
         ref={inputRef}
         type="file"
@@ -135,7 +135,7 @@ export function MultiImageUploader({ onUploaded, className }: MultiImageUploader
           </>
         ) : (
           <>
-            <ImagePlus className="h-4 w-4" />
+            <ImagePlus className="h-2 w-2" />
             {images.length === 0
               ? "Sélectionner des photos"
               : "Ajouter d'autres photos"}
@@ -144,7 +144,7 @@ export function MultiImageUploader({ onUploaded, className }: MultiImageUploader
       </Button>
 
       {images.length > 0 && (
-        <div className="grid grid-cols-3 gap-2 sm:grid-cols-4 md:grid-cols-5">
+        <div className="grid grid-cols-3 gap-6 sm:grid-cols-4 md:grid-cols-5">
           {images.map((img, index) => (
             <div key={index} className="group relative aspect-square overflow-hidden rounded-md bg-muted">
               <img
