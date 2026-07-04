@@ -28,7 +28,6 @@ export interface MembreBureau {
   nom: string;
   prenom: string;
   telephone: string;
-  age: string;
   photoStorageId?: Id<"_storage">;
   photoUrl?: string | null;
   role: string;
