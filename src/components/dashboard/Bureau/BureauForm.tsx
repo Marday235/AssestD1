@@ -16,6 +16,7 @@ import {
 import { ImageUploader } from "@/components/dashboard/ImageUploader";
 import {
   bureauFormSchema,
+  POSTES_BUREAU,
   STATUTS_BUREAU,
   type BureauFormValues,
   type MembreBureau,
@@ -60,6 +61,7 @@ export function BureauForm({ defaultValues, onSubmit, onCancel, submitLabel = "E
   });
 
   const statutValue = watch("statut");
+  const roleValue = watch("role");
 
   async function handleFormSubmit(values: BureauFormValues) {
     setIsSubmitting(true);
@@ -106,8 +108,22 @@ export function BureauForm({ defaultValues, onSubmit, onCancel, submitLabel = "E
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div>
-          <Label htmlFor="role">Rôle</Label>
-          <Input id="role" {...register("role")} placeholder="Président, Trésorier…" />
+          <Label className="mb-1.5 block">Poste</Label>
+          <Select
+            value={roleValue ?? ""}
+            onValueChange={(value) => setValue("role", value)}
+          >
+            <SelectTrigger>
+              <SelectValue placeholder="Sélectionner un poste" />
+            </SelectTrigger>
+            <SelectContent>
+              {POSTES_BUREAU.map((poste) => (
+                <SelectItem key={poste} value={poste}>
+                  {poste}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
           {errors.role && <p className="mt-1 text-xs text-destructive">{errors.role.message}</p>}
         </div>
         <div>

@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { SectionHeader, SearchBar } from "@/components/dashboard/shared";
 import { useToast } from "@/components/dashboard/ui/use-toast";
 import { useBureau } from "@/hooks/useBureau";
-import { BureauTable } from "@/components/dashboard/Bureau/BureauTable";
+import { BureauGrid } from "@/components/dashboard/Bureau/BureauGrid";
 import { EditBureauDialog } from "@/components/dashboard/Bureau/EditBureauDialog";
 import type { BureauFormValues, MembreBureau } from "@/components/dashboard/Bureau/bureau.types";
 import type { Id } from "../../../../convex/_generated/dataModel";
@@ -82,7 +82,7 @@ export function Bureau() {
 
       <SearchBar value={search} onChange={setSearch} placeholder="Rechercher un membre…" />
 
-      <BureauTable
+      <BureauGrid
         membres={filteredMembres}
         isLoading={isLoading}
         hasSearch={search.trim().length > 0}
