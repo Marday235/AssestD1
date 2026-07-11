@@ -73,7 +73,14 @@ export function BureauForm({ defaultValues, onSubmit, onCancel, submitLabel = "E
   }
 
   return (
-    <form onSubmit={handleSubmit(handleFormSubmit)} className="flex flex-col gap-4">
+    <form onSubmit={handleSubmit(handleFormSubmit)}
+    onKeyDown={(e) => {
+      if (e.key === "Enter" && !(e.target instanceof HTMLTextAreaElement)) {
+        e.preventDefault();
+        handleSubmit(handleFormSubmit)();
+      }
+    }}
+    className="flex flex-col gap-4">
       <div>
         <Label className="mb-2 block">Photo</Label>
         <ImageUploader

@@ -34,7 +34,7 @@ Créée dans un esprit de solidarité et de fraternité, l'ASEEST/D est légalem
         </div>
 
         {/* Video player and stats */}
-        <div className='relative mb-8 h-full w-full max-lg:space-y-6 sm:mb-2 lg:mb-2'>
+        <div className='relative mb-8 h-100 w-100 max-lg:space-y-6 sm:mb-2 lg:mb-2'>
           <img
             src='/4.JPG'
             alt='About us illustration'

@@ -41,7 +41,7 @@ export default function HeroSection() {
                         <div
                             className="mask-b-from-35% mask-b-to-90% absolute inset-0 top-56 -z-20 lg:top-32">
                             <img
-                                src='/1.JPG'
+                                src='/5.JPG'
                                 alt="background"
                                 className="hidden size-full dark:block"
                                 width="3276"
@@ -90,7 +90,7 @@ export default function HeroSection() {
                                     />
                                     <img
                                         className="z-2 border-border/25 aspect-15/8 relative rounded-2xl border dark:hidden"
-                                        src='/3.JPG'
+                                        src='/5.JPG'
                                         alt="app screen"
                                         width="2700"
                                         height="1440"
