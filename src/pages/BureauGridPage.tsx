@@ -35,7 +35,7 @@ export function BureauGridPage() {
 
   if (isLoading) {
     return (
-      <>
+      <section id="team" className="scroll-mt-24">
        <div className="mb-12 space-y-4 text-center sm:mb-16 lg:mb-24">
           <h2 className="text-2xl font-semibold md:text-3xl lg:text-4xl">
             <span className="relative z-1">
@@ -58,7 +58,7 @@ export function BureauGridPage() {
           </div>
         ))}
       </div>
-      /</>
+      </section>
     );
   }
 
@@ -79,7 +79,7 @@ export function BureauGridPage() {
 
 
   return (
-    <>
+    <section id="team" className="scroll-mt-24">
       {/* Grille : 2 colonnes mobile, 4 colonnes desktop */}
       <div className="mb-12 space-y-4 text-center sm:mb-16 lg:mb-24">
           <h2 className="text-2xl font-semibold md:text-3xl lg:text-4xl">
@@ -128,6 +128,6 @@ export function BureauGridPage() {
           </Button>
         </div>
       )}
-    </>
+    </section>
   );
 }
