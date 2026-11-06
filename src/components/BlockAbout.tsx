@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button";
 
 const AboutUs = () => {
   return (
-    <section className='bg-muted py-8 sm:py-6 lg:py-14 ' id='about'>
+    <section className='bg-muted py-8 sm:py-6 lg:py-14 scroll-mt-24' id='about'>
       <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
         {/* Header */}
         <div className='mb-12 space-y-4 text-center md:mb-16 lg:mb-24'>
@@ -26,8 +26,8 @@ Créée dans un esprit de solidarité et de fraternité, l'ASEEST/D est légalem
  elle œuvre pour l'épanouissement académique, social, culturel et professionnel de ses membres, tout en renforçant les liens d'amitié et de coopération entre les ressortissants tchadiens vivant à Douala.
           </p>
           <Button size='lg' asChild className='group rounded-lg text-base has-[>svg]:px-6'>
-            <a href='#'>
-              Read more
+            <a href='/postuler'>
+              Postuler pour un stage
               <ArrowRightIcon className='transition-transform duration-200 group-hover:translate-x-0.5' />
             </a>
           </Button>

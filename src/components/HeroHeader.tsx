@@ -10,8 +10,8 @@ import { cn } from "@/lib/utils";
 const menuItems = [
   { name: "Home", href: "/" },
   { name: "Stage", href: "/postuler" },
-  { name: "A propos", href: "#about" },
-  { name: "Bureau", href: "#team" },
+  { name: "A propos", href: "/#about" },
+  { name: "Bureau", href: "/#team" },
 ];
 
 export const HeroHeader = () => {
@@ -88,6 +88,7 @@ export const HeroHeader = () => {
                     <li key={index}>
                       <a
                         href={item.href}
+                        onClick={() => setMenuState(false)}
                         className="text-muted-foreground hover:text-accent-foreground block duration-150"
                       >
                         <span>{item.name}</span>
